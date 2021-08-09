@@ -22,7 +22,7 @@ namespace TestPayRollJSON
             new PayRollJson().AddDataIntoJsonServer(data);
         }
         [TestMethod]
-        public void AddMultipleData()
+        public void TestAddMultipleData()
         {
             List<Employeedata> emp = new List<Employeedata>
             {
@@ -44,5 +44,13 @@ namespace TestPayRollJSON
             bool actual = new PayRollJson().UpdateDetailInJsonServer(employee);
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void TestDeleteEmployee()
+        {
+            bool expected = true;
+            bool actual = new PayRollJson().DeleteEmployeeData(6);
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }
