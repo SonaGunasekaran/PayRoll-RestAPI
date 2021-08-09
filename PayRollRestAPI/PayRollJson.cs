@@ -29,7 +29,7 @@ namespace PayRollRestAPI
             var res = JsonConvert.DeserializeObject<List<Employeedata>>(response.Content);
             return res;
         }
-        public void WriteIntoJsonServer(Employeedata emp)
+        public void AddDataIntoJsonServer(Employeedata emp)
         {
             //Passing the post method 
             RestRequest request = new RestRequest("/Employee", Method.POST);
@@ -42,6 +42,13 @@ namespace PayRollRestAPI
             IRestResponse response = client.Execute(request);
             var res = JsonConvert.DeserializeObject<Employeedata>(response.Content);
             Console.WriteLine("" + res.id + "Added");
+        }
+        public void AddMultipleDataIntoServer(List<Employeedata> employee)
+        {
+            foreach (var e in employee)
+            {
+                AddDataIntoJsonServer(e);
+            }
         }
     }
 }
