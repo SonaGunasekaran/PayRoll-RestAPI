@@ -50,5 +50,17 @@ namespace PayRollRestAPI
                 AddDataIntoJsonServer(e);
             }
         }
+        public bool UpdateDetailInJsonServer(Employeedata emp)
+        {
+            RestRequest request = new RestRequest("/Employee/" + emp.id, Method.PUT);
+            JsonObject json = new JsonObject();
+            json.Add("id", emp.id);
+            json.Add("name", emp.Name);
+            json.Add("salary", emp.Salary);
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            var res = JsonConvert.DeserializeObject<Employeedata>(response.Content);
+            return response.IsSuccessful;
+        }
     }
 }
