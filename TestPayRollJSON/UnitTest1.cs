@@ -12,9 +12,16 @@ namespace TestPayRollJSON
         public void ReadAllDataFromServer()
         {
             int expected = 1;
-            List<Employeedata> employeeList = new PayRollJson().ReadFromServer();
+            List<Employeedata> employeeList = new PayRollJson().ReadServer();
             Assert.AreEqual(expected, employeeList.Count);
         }
+        [TestMethod]
+        public void WriteIntoServer()
+        {
+            Employeedata data= new Employeedata{ id = 2, Name = "Mickel", Salary = 80000 };
+            new PayRollJson().WriteIntoJsonServer(data);
+        }
+
 
     }
 }
