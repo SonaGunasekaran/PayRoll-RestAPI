@@ -36,5 +36,13 @@ namespace TestPayRollJSON
             int expected = 5;
             Assert.AreEqual(expected, emp.Count);
         }
+        [TestMethod]
+        public void TestUpdateSalary()
+        {
+            bool expected = true;
+            Employeedata employee = new Employeedata { id = 4, Name = "Damon", Salary = 65000 };
+            bool actual = new PayRollJson().UpdateDetailInJsonServer(employee);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
