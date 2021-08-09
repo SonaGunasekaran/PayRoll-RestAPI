@@ -40,6 +40,7 @@ namespace PayRollRestAPI
             json.Add("salary", emp.Salary);
             request.AddParameter("application/json", json, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
+            //Convert the json object to list
             var res = JsonConvert.DeserializeObject<Employeedata>(response.Content);
             Console.WriteLine("" + res.id + "Added");
         }
@@ -52,6 +53,7 @@ namespace PayRollRestAPI
         }
         public bool UpdateDetailInJsonServer(Employeedata emp)
         {
+            //Passing the put method 
             RestRequest request = new RestRequest("/Employee/" + emp.id, Method.PUT);
             JsonObject json = new JsonObject();
             json.Add("id", emp.id);
@@ -59,7 +61,15 @@ namespace PayRollRestAPI
             json.Add("salary", emp.Salary);
             request.AddParameter("application/json", json, ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
+            //Convert the json object to list
             var res = JsonConvert.DeserializeObject<Employeedata>(response.Content);
+            return response.IsSuccessful;
+        }
+        public bool DeleteEmployeeData(int id)
+        {
+            //Passing the delete method 
+            RestRequest request = new RestRequest("/Employee/" + id, Method.DELETE);
+            IRestResponse response = client.Execute(request);
             return response.IsSuccessful;
         }
     }
